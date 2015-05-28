@@ -1,8 +1,8 @@
 def computepay(hours,rate):
     if hours < 40 :
-        pay=int(hours)* int(rate)
+        pay=hours* rate
     else:
-        pay=(int(hours)-40)*1.5*int(rate)+40*int(rate)
+        pay=(hours-40)*1.5*rate+40*rate
     return pay
 hours=raw_input("How many hours do you work per week?\n")
 try: 
