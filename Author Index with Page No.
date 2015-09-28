@@ -7,13 +7,13 @@ Namelist = RawNamelist
 #def amendname():
 key = "indd"
 Namecount = 0
-Linecount = 0
 for name in Namelist:
     name = name.rstrip()
     Namecount = Namecount +1
     print (Namecount)
     print (name)
     A = name
+    Linecount = 0
     for line in Booktext:
         Linecount = Linecount +1
         line = line.rstrip()
