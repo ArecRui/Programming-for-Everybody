@@ -1,32 +1,35 @@
 Listname = "F:/Emerging Media/Author Index 150910/1.txt"
 Bookname = "F:/Emerging Media/BookChs/0.txt"
-Booktext = open(Bookname)
 RawNamelist = open(Listname)
 Namelist = RawNamelist
-#Namelist = amendname(RawNamelist)
-#def amendname():
+def Firstname(Rawname):
+    firstname = Rawname[:Rawname.rfind(",")]
+    return firstname
 key = "indd"
 Namecount = 0
 for name in Namelist:
+    Booktext = open(Bookname)
     name = name.rstrip()
-    Namecount = Namecount +1
-    print (Namecount)
-    print (name)
+    #Namecount = Namecount +1
+    #print (Namecount)
+    #print (name)
     A = name
     Linecount = 0
     for line in Booktext:
-        Linecount = Linecount +1
         line = line.rstrip()
-        print (Namecount,Linecount)
+        #Linecount = Linecount +1
+        #print (Namecount,Linecount)
         if not A in line :
             continue
         Page = 0
         Linecount2 = 0
         for line in Booktext.readlines()[1:len(Booktext.readlines())-1]:
-            Linecount2 = Linecount2 + 1
-            print (Namecount, Linecount, Linecount2)
+            #Linecount2 = Linecount2 + 1
+            #print (Namecount, Linecount, Linecount2)
             if not key in line:
                 continue
             Page =  line[line.rfind("indd")+5:]
-            print (Page)
+            print (name,Page)
             break
+    
+
