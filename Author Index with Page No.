@@ -1,4 +1,4 @@
-Listname = "F:/Emerging Media/Author Index 150910/1.txt"
+Listname = "F:/Emerging Media/Author Index 150910/0.txt"
 Bookname = "F:/Emerging Media/BookChs/0.txt"
 RawNamelist = open(Listname)
 Namelist = RawNamelist
@@ -13,13 +13,13 @@ for name in Namelist:
     #Namecount = Namecount +1
     #print (Namecount)
     #print (name)
-    A = name
+    firstname = Firstname(name)
     Linecount = 0
     for line in Booktext:
         line = line.rstrip()
         #Linecount = Linecount +1
         #print (Namecount,Linecount)
-        if not A in line :
+        if not firstname in line :
             continue
         Page = 0
         Linecount2 = 0
@@ -28,7 +28,10 @@ for name in Namelist:
             #print (Namecount, Linecount, Linecount2)
             if not key in line:
                 continue
-            Page =  line[line.rfind("indd")+5:]
+            KeyPos = line.find('indd')
+            Sp1Pos = line.find(' ',KeyPos)
+            Sp2Pos = line.find(' ',Sp1Pos+1)
+            Page =  line[Sp1Pos:Sp2Pos]
             print (name,Page)
             break
     
