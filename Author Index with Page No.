@@ -5,34 +5,46 @@ Namelist = RawNamelist
 def Firstname(Rawname):
     firstname = Rawname[:Rawname.rfind(",")]
     return firstname
+def PageNo(line):
+    KeyPos = line.find('indd')
+    Sp1Pos = line.find(' ',KeyPos)
+    Sp2Pos = line.find(' ',Sp1Pos+1)
+    Page =  line[Sp1Pos:Sp2Pos]
+    Page = int (Page)
+    return Page
 key = "indd"
 Namecount = 0
 for name in Namelist:
+    Pages = list()
     Booktext = open(Bookname)
     name = name.rstrip()
-    #Namecount = Namecount +1
-    #print (Namecount)
-    #print (name)
+    Namecount = Namecount +1
+    #print ("Begin with name:",Namecount)
     firstname = Firstname(name)
     Linecount = 0
-    for line in Booktext:
+    for line in Booktext.readlines()[Linecount:len(Booktext.readlines())-1]:
+        Booktext = open(Bookname)
         line = line.rstrip()
-        #Linecount = Linecount +1
-        #print (Namecount,Linecount)
-        if not firstname in line :
-            continue
+        Linecount = Linecount +1
         Page = 0
         Linecount2 = 0
-        for line in Booktext.readlines()[1:len(Booktext.readlines())-1]:
-            #Linecount2 = Linecount2 + 1
-            #print (Namecount, Linecount, Linecount2)
+        #print ("Searching name :",Namecount, "in line:",Linecount)
+        if not firstname in line :
+            #print("Name", Namecount, "not found in line", Linecount)
+            continue
+        #print("Name", Namecount, "found in line", Linecount)
+        for line in Booktext.readlines()[Linecount:len(Booktext.readlines())-1]:
+            Linecount2 = Linecount2 + 1
+            #print ("Searching page number for name ",Namecount, "in",Linecount, "in",Linecount2,"lines after the name")
             if not key in line:
+                #print ("Page number for name ",Namecount, "in",Linecount, "Not found in",Linecount2,"lines after the name")
                 continue
-            KeyPos = line.find('indd')
-            Sp1Pos = line.find(' ',KeyPos)
-            Sp2Pos = line.find(' ',Sp1Pos+1)
-            Page =  line[Sp1Pos:Sp2Pos]
-            print (name,Page)
+            Page = PageNo(line)
+            #print ("Page number for name ",Namecount, "in",Linecount, "found in",Linecount2,"lines after the name")
             break
-    
-
+        if (Page  not in Pages):
+            Pages.append(Page)
+        else:
+            a = 1 
+    print (name,"\t""\t""\t""\t",Pages)
+    #print ("Done with name ", Namecount)
