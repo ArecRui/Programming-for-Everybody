@@ -1,5 +1,5 @@
-Listname = "F:/Emerging Media/Author Index 150910/0.txt"
-Bookname = "F:/Emerging Media/BookChs/0.txt"
+Listname = "F:/Emerging Media/Author Index 150910/1.txt"
+Bookname = "F:/Emerging Media/BookChs/1.txt"
 RawNamelist = open(Listname)
 Namelist = RawNamelist
 def Firstname(Rawname):
@@ -12,6 +12,10 @@ def PageNo(line):
     Page =  line[Sp1Pos:Sp2Pos]
     Page = int (Page)
     return Page
+def same(firstname,line)
+    line = ""
+    firstname = ""
+    
 key = "indd"
 Namecount = 0
 for name in Namelist:
@@ -33,6 +37,10 @@ for name in Namelist:
             #print("Name", Namecount, "not found in line", Linecount)
             continue
         #print("Name", Namecount, "found in line", Linecount)
+        if not (("(" in line) or (")" in line) or ("&" in line) or ("," in line)):
+            continue
+        if not same(firstname,line):
+            continue
         for line in Booktext.readlines()[Linecount:len(Booktext.readlines())-1]:
             Linecount2 = Linecount2 + 1
             #print ("Searching page number for name ",Namecount, "in",Linecount, "in",Linecount2,"lines after the name")
